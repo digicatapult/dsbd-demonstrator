@@ -1,0 +1,5 @@
+---
+- hosts: dsbd-pi
+  roles:
+    - { role: geerlingguy.nodejs, nodejs_version: 16.x, nodejs_npm_global_packages: [npm] }
+    - { role: nginxinc.nginx, nginx_logrotate_conf_enable: true }
