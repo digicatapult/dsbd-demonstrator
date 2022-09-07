@@ -3,4 +3,6 @@
 - name: reload systemctl
   command: systemctl daemon-reload
 - name: restart morello-api
-  command: systemctl restart morello-api
+  service:
+    name: morello-api
+    state: restarted
