@@ -1,2 +1,37 @@
 ---
 # tasks file for morello-api
+- name: Define user for api service to run as
+  set_fact:
+    morello_api_user: "{{ ansible_user | default(lookup('env', 'USER')) }}"
+  when: morello_api_user is not defined
+
+- name: Clone the API repository
+  git:
+    repo: https://github.com/digicatapult/morello-api.git
+    dest: /home/{{ morello_api_user }}/www/api
+    version: latest
+    force: yes
+- name: install deps
+  npm:
+    path: /home/{{ morello_api_user }}/www/api
+- name: change ownership of application
+  ansible.builtin.file:
+    path: /home/{{ morello_api_user }}/www/api
+    state: directory
+    recurse: yes
+    owner: "{{ morello_api_user }}"
+    group: "{{ morello_api_user }}"
+- name: build application
+  shell: 
+    chdir: /home/{{ morello_api_user }}/www/api
+    cmd: npm run build
+- name: Create environment file
+  template: src=morello-api.env dest=/etc/morello-api
+  notify:
+    - restart morello-api
+- name: Create Unit file
+  template: src=morello-api.systemd dest=/lib/systemd/system/morello-api.service mode=644
+  notify:
+    - reload systemctl
+- name: start morello-api
+  service: name=morello-api.service state=started enabled=yes
