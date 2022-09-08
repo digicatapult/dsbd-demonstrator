@@ -1,2 +1,17 @@
 ---
 # tasks file for morello-ui
+  - name: check latest morello-ui
+    uri:
+      url: https://api.github.com/repos/digicatapult/morello-ui/releases/latest
+      return_content: true
+    register: ui_latest
+
+  - name: "installing morello-ui {{ ui_latest.json.tag_name }}"
+    loop: "{{ ui_latest.json.assets }}"
+    when: "'morello-ui-build.tar.gz' in item.name"
+    unarchive:
+      remote_src: yes
+      src: "{{ item.browser_download_url }}"
+      dest: /var/www/ui
+      owner: nginx
+      group: nginx
