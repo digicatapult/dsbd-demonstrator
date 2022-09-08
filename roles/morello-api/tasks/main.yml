@@ -25,6 +25,26 @@
   shell: 
     chdir: /home/{{ morello_api_user }}/www/api
     cmd: npm run build
+- name: create bin directory
+  ansible.builtin.file:
+    path: /home/{{ morello_api_user }}/www/api/build/bin
+    state: directory
+    owner: "{{ morello_api_user }}"
+    group: "{{ morello_api_user }}"
+- name: check latest morello-examples
+  uri:
+    url: https://api.github.com/repos/digicatapult/morello-examples/releases/latest
+    return_content: true
+  register: examples_latest
+- name: "installing morello-examples {{ examples_latest.json.tag_name }}"
+  loop: "{{ examples_latest.json.assets }}"
+  when: "'morello-examples.tar.gz' in item.name"
+  unarchive:
+    remote_src: yes
+    src: "{{ item.browser_download_url }}"
+    dest: /home/{{ morello_api_user }}/www/api/build/bin
+    owner: "{{ morello_api_user }}"
+    group: "{{ morello_api_user }}"
 - name: Create environment file
   template: src=morello-api.env dest=/etc/morello-api
   notify:
