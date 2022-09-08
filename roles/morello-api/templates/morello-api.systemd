@@ -1,0 +1,16 @@
+[Unit]
+Description=Morello-API
+Documentation=http://github.com/digicatapult/morello-api
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User={{ morello_api_user }}
+EnvironmentFile=/etc/morello-api
+WorkingDirectory=/home/{{ morello_api_user }}/www/api
+ExecStart=/usr/bin/node ./build/index.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

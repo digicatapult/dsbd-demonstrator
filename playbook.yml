@@ -3,3 +3,4 @@
   roles:
     - { role: geerlingguy.nodejs, nodejs_version: 16.x, nodejs_npm_global_packages: [npm] }
     - { role: nginxinc.nginx, nginx_logrotate_conf_enable: true }
+    - { role: morello-api, morello_api_port: 3000, morello_api_log_level: debug, morello_api_morello_host: 127.0.0.1, morello_api_morello_port: 1022, morello_api_morello_username: root }
