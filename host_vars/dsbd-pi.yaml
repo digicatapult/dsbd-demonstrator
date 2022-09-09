@@ -1,0 +1,42 @@
+---
+nodejs_version: 16.x
+nodejs_npm_global_packages: [npm]
+nginx_logrotate_conf_enable: true
+morello_api_port: 3000
+morello_api_host: 192.168.1.172
+morello_api_log_level: debug
+morello_api_morello_host: 127.0.0.1
+morello_api_morello_port: 1022
+morello_api_morello_username: root
+
+nginx_config_http_template_enable: true
+nginx_config_http_template:
+  - backup: true
+    config:
+      core:
+        absolute_redirect: false
+        etag: true
+      servers:
+        - core:
+            aio:
+              threads: default
+            keepalive_timeout: 75s
+            listen:
+              - address: 0.0.0.0
+                port: 80
+                default_server: true
+                ssl: false
+                http2: false
+                spdy: false
+                proxy_protocol: false    
+          locations:
+            - location: /
+              core:
+                root: /var/www/ui/
+                index: index.html
+                try_files:
+                  files: $uri $uri/
+                  uri: /index.html
+                limit_except:
+                  method: GET
+                  directive: "allow all"

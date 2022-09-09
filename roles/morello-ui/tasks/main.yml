@@ -15,3 +15,6 @@
       dest: /var/www/ui
       owner: nginx
       group: nginx
+
+  - name: Create config file
+    template: src=config.js.tpl dest=/var/www/ui/config.js
