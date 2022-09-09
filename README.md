@@ -1,5 +1,6 @@
 # DSBD Demonstrator
 
+Ansible playbook for installing the DSBD demonstrator using a private network with the demonstrator UI running on localhost.
 ## Installation Prerequisites
 
 ### Raspberry pi
@@ -61,3 +62,10 @@ Copy this key to the morello box
 
 Test login
 `ssh demo@10.132.25.2`
+
+## Installation
+
+Login to the raspberryPi demo box
+
+`ssh admin@<pi ip>`
+
