@@ -3,11 +3,11 @@ nodejs_version: 16.x
 nodejs_npm_global_packages: [npm]
 nginx_logrotate_conf_enable: true
 morello_api_port: 3000
-morello_api_host: 192.168.1.172
+morello_api_host: 10.132.25.1
 morello_api_log_level: debug
-morello_api_morello_host: 127.0.0.1
-morello_api_morello_port: 1022
-morello_api_morello_username: root
+morello_api_morello_host: 10.132.25.2
+morello_api_morello_port: 22
+morello_api_morello_username: demo
 
 nginx_config_http_template_enable: true
 nginx_config_http_template:
