@@ -5,6 +5,12 @@
       url: https://api.github.com/repos/digicatapult/morello-ui/releases/latest
       return_content: true
     register: ui_latest
+  - name: create ui directory
+    ansible.builtin.file:
+      path: /var/www/ui
+      state: directory
+      owner: "nginx"
+      group: "nginx"
 
   - name: "installing morello-ui {{ ui_latest.json.tag_name }}"
     loop: "{{ ui_latest.json.assets }}"
@@ -18,3 +24,10 @@
 
   - name: Create config file
     template: src=config.js.tpl dest=/var/www/ui/config.js
+  
+  - name: autostart browser
+    copy:
+      src: autostart
+      dest: /etc/xdg/lxsession/LXDE-pi/autostart
+      owner: "root"
+      group: "root"

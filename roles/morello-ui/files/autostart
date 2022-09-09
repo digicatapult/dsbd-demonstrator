@@ -1,0 +1,8 @@
+@lxpanel --profile LXDE-pi
+@pcmanfm --desktop --profile LXDE-pi
+
+@xset s off
+@xset -dpms
+@xset s noblank
+
+@chromium-browser --start-fullscreen http://127.0.0.1 https://github.com/digicatapult/morello-examples
