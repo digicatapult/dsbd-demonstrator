@@ -42,17 +42,6 @@
   unarchive:
     remote_src: yes
     src: "{{ item.browser_download_url }}"
-    dest: /home/{{ morello_api_user }}/www/api/build/bin
-    owner: "{{ morello_api_user }}"
-    group: "{{ morello_api_user }}"
-  notify:
-    - restart morello-api
-- name: "installing morello-examples2 {{ examples_latest.json.tag_name }}"
-  loop: "{{ examples_latest.json.assets }}"
-  when: "'morello-examples.tar.gz' in item.name"
-  unarchive:
-    remote_src: yes
-    src: "{{ item.browser_download_url }}"
     dest: /home/{{ morello_api_user }}/www/api/bin
     owner: "{{ morello_api_user }}"
     group: "{{ morello_api_user }}"
