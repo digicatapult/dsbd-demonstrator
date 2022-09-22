@@ -38,14 +38,20 @@ Restart systemd networking
 `sudo systemctl restart systemd-networkd`
 
 ### Morello Box
+
+Set sshd to not use DNS in `/etc/ssh/sshd_config`
+```
+UseDNS no
+```
+
 Add the following line to `/etc/rc.conf`
 
 ```
 ifconfig_re0_alias0="10.132.25.2 netmask 255.255.255.248"
 ```
 
-Restart the networking and routing daemons
-`/etc/rc.d/netif restart && /etc/rc.d/routing restart`
+Restart the networking, routing and ssh daemons
+`/etc/rc.d/netif restart && /etc/rc.d/routing restart && /etc/rc.d/sshd restart`
 
 ### ssh-keys
 
