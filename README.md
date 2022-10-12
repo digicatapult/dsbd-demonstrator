@@ -44,10 +44,11 @@ Set sshd to not use DNS in `/etc/ssh/sshd_config`
 UseDNS no
 ```
 
-Add the following line to `/etc/rc.conf`
+Add the following lines to `/etc/rc.conf`
 
 ```
 ifconfig_re0_alias0="10.132.25.2 netmask 255.255.255.248"
+ntpd_enable="YES"
 ```
 
 Restart the networking, routing and ssh daemons
