@@ -2,6 +2,7 @@
 - hosts: dsbd-pi
   roles:
     - { role: geerlingguy.nodejs }
+    - { role: geerlingguy.ntp }
     - { role: nginxinc.nginx }
     - { role: morello-api }
     - { role: morello-ui }
