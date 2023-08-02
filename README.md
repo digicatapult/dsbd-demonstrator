@@ -51,8 +51,13 @@ ifconfig_re0_alias0="10.132.25.2 netmask 255.255.255.248"
 ntpd_enable="YES"
 ```
 
+Ensure that the pools in `/etc/ntp.conf` are disabled and that the following line is added
+```
+server 10.132.25.1 iburst
+```
+
 Restart the networking, routing and ssh daemons
-`/etc/rc.d/netif restart && /etc/rc.d/routing restart && /etc/rc.d/sshd restart`
+`/etc/rc.d/netif restart && /etc/rc.d/routing restart && /etc/rc.d/sshd restart && service ntpd restart`
 
 ### ssh-keys
 
