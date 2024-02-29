@@ -27,7 +27,7 @@
   
   - name: autostart browser
     copy:
-      src: autostart
-      dest: /etc/xdg/lxsession/LXDE-pi/autostart
-      owner: "root"
-      group: "root"
+      src: wayfire.ini
+      dest: /home/{{ ansible_user}}/.config/wayfire.ini
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"

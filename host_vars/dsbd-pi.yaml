@@ -5,7 +5,7 @@ ntp_restrict:
   - "127.0.0.1"
   - "::1"
   - "10.132.25.1 mask 255.255.255.248 nomodify notrap nopeer"
-nodejs_version: 16.x
+nodejs_version: 18.x
 nodejs_npm_global_packages: [npm]
 nginx_logrotate_conf_enable: true
 morello_api_port: 3000
