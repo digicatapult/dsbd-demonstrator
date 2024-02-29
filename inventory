@@ -1,1 +1,1 @@
-dsbd-pi ansible_host=10.132.40.125 ansible_user=admin ansible_connection=local
+dsbd-pi ansible_host=10.132.40.73 ansible_user=admin ansible_connection=local
